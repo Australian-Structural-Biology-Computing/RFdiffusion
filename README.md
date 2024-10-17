@@ -1,3 +1,27 @@
+The purpose of this fork is to make RFD more portable for adding to pipelines such as [Nextflow](https://www.nextflow.io/).
+- An rfdiffusion.def file has been added.
+
+Installation using apptainer
+---
+1. Ensure you have apptainer installed.
+2. Download the rfdiffusion.def file:  
+   ```
+   wget https://github.com/Australian-Structural-Biology-Computing/RFdiffusion/blob/main/slim_colab_rfdiffusion.def
+   ```
+3. Using apptainer build the RFDiffusion.sif image.
+   ```
+   apptainer build rfdiffusion.sif slim_colab_rfdiffusion.def
+   ```
+
+Running RFD within the container 
+---
+1. Run apptainer as per the below example script, replacing the parameters to match your use:
+```
+apptainer run --nv rfdiffusion.sif inference.model_directory_path=./models inference.output_prefix=./outputs/test inference.schedule_directory_path=$TMPDIR/RFdiffusion inference.input_pdb=./inputs/5TPN.pdb 'contigmap.contigs=[150-150]' inference.num_designs=3
+```
+
+# Original README preserved below:
+---
 # RF*diffusion*
 
 <!--
